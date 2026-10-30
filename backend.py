@@ -322,12 +322,12 @@ class LocalBackend:
             server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self._socket = server_socket
             server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            server_socket.bind(("https://ai-help-you-yf7r.vercel.app", 0))
+            server_socket.bind(("127.0.0.1", 0))
             server_socket.listen(128)
             port = server_socket.getsockname()[1]
             config = uvicorn.Config(
                 create_backend_app(self._token),
-                host="https://ai-help-you-yf7r.vercel.app",
+                host="127.0.0.1",
                 port=port,
                 log_level="error",
                 access_log=False,
@@ -340,7 +340,7 @@ class LocalBackend:
                 daemon=True,
             )
             self._thread.start()
-            self._base_url = f"https://ai-help-you-yf7r.vercel.app:{port}"
+            self._base_url = f"http://127.0.0.1:{port}"
             deadline = time.monotonic() + startup_timeout
             while time.monotonic() < deadline:
                 if self._server.started:
