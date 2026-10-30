@@ -8,7 +8,9 @@ from datetime import datetime
 from pathlib import Path
 from tkinter import filedialog, messagebox
 from typing import Any
+from fastapi import FastAPI
 
+app = FastAPI()  # Assurez-vous que c'est bien nommé "app" et au niveau racine
 import customtkinter as ctk
 from PIL import Image, ImageDraw, ImageGrab, ImageTk
 
